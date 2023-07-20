@@ -1,0 +1,89 @@
+<nav class="navbar navbar-expand-lg z-3 ">
+    <div class="container-fluid ">
+        <a class="navbar-brand" href="/">TheProStore</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item <%= active === 'Everything' ? 'active' : '' %>">
+                    <a class="nav-link" aria-current="page" href="/products">Everything</a>
+                </li>
+                <li class="nav-item <%= active === 'Laptop' ? 'active' : '' %>">
+                    <a class="nav-link" href="/products/category/Laptop">Laptops</a>
+                </li>
+                <li class="nav-item <%= active === 'PC' ? 'active' : '' %>">
+                    <a class="nav-link" href="/products/category/PC">PC</a>
+                </li>
+                <li class="nav-item <%= active === 'Accessory' ? 'active' : '' %>">
+                    <a class="nav-link" href="/products/category/Accessory">Accessories</a>
+                </li>
+                <li class="nav-item d-none">
+                    <a class="nav-link" href="/products/new">New</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item ml-5">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item d-flex">
+                    <a class="nav-link" href="#">Contact Us</a>
+                </li>
+                <li class="nav-item d-flex">
+                    <button class="cartBtn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+                        aria-controls="offcanvasRight">$<%= totalPrice %><i data-feather="shopping-cart"
+                                class="ms-2"></i></button>
+                </li>
+                <li class="nav-item d-flex">
+                    <a class="nav-link" href="#"><i data-feather="user"></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header border-bottom">
+        <h5 class="offcanvas-title" id="offcanvasRightLabel">Shopping Cart</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body  align-items-start flex-column">
+        <div class="offcanvas-carts h-75">
+            <% if(totalPrice> 0){ %>
+                <% let qty=0 %>
+                    <% qty=totalPrice/product.price %>
+                        <div class="cartProduct">
+                            <div class="card mb-3" style="max-width: 540px;">
+                                <div class="row g-0">
+                                    <div class=" col-2">
+                                        <a href="/product/<%= product._id %>"><img class="cartImg"
+                                                src="<%= product.img[0] %>" alt="<%= product.name %>"></a>
+                                    </div>
+                                    <div class="ps-3 ps-md-0 col-10">
+                                        <div class="py-2 px-3 card-body">
+                                            <h5 class="card-title"><a class="cartName"
+                                                    href="/product/<%= product._id %>">
+                                                    <%= product.name %>
+                                                </a></h5>
+                                            <p class="card-text">
+                                                <%= qty %> x $<%= product.price %>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between marginme">
+                            <p><strong>Subtotal:</strong> <span>$<%= totalPrice %></span></p>
+                        </div>
+                        <% }else{ %>
+                            <div class="noProducts">
+                                <p class="">No products in the cart.</p>
+                            </div>
+                            <% }%>
+        </div>
+        <div class="offcanvas-footer d-flex align-items-end h-25">
+            <a href="/products" class="CS">CONTINUE SHOPPING</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+#priceRange {
+  height: 6px;
+  margin-top: 10px;
+  background-color: #e0e0e0;
+}
+
+#priceRange .noUi-connect {
+  background-color: black;
+}
+
+#priceRange .noUi-handle {
+  width: 20px;
+  height: 20px;
+  background-color: black;
+  border: none;
+  border-radius: 50%; 
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.filterPrice{
+  justify-content: space-between;
+
+}
+
+.priceRangeText{
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

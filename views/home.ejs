@@ -1,0 +1,175 @@
+<% layout('layout/boilerplate') %>
+
+    <!-- ? home header is here -->
+    <header class="position-relative">
+        <div class="home-header-shadow position-absolute"></div>
+
+        <div class="container">
+            <div class="row my-5">
+                <div class="col">
+                    <div class="home-header-content position-absolute" id="header-text">
+                        <h1 class="my-3">Best Deals For <br> Daily Tech!</h1>
+                        <h3 class="mb-3 fs-5">20% Off On MSI Laptops</h3>
+                        <a href="#" type="button" class="btn btn-light home-header-button me-3">Shop Now</a>
+                        <a href="#" type="button" class="btn home-header-button find-more">Find More</a>
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+        </div>
+
+    </header>
+
+    <!-- ? home header ends here -->
+
+    <!-- ? home main content starts here -->
+
+    <main class="position-relative my-5">
+        <section class="cards-section mb-3">
+            <div class="container home-container my-5">
+                <div class="row row-cols-1 row-cols-xl-3">
+                    <div class="col-12 col-lg-4 d-flex justify-content-center">
+                        <div class="card card-shop-now text-bg-dark position-relative my-2 hidden">
+                            <img src="https://images.unsplash.com/photo-1526657782461-9fe13402a841?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bGFwdG9wfGVufDB8MXwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"
+                                class="card-img product-img" alt="...">
+                            <div class="card-img-overlay card-shop-now-content position-absolute">
+                                <h5 class="card-title">
+                                    <%= products[0].name %>
+                                </h5>
+                                <p class="card-text">
+                                    <%= products[0].description %>
+                                </p>
+                                <p class="card-text"><small>
+                                        <%= products[0].price %>
+                                    </small></p>
+                                <a type="button" class="btn btn-light" href="#">Shop Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-4 d-flex justify-content-center ">
+                        <div class="card card-shop-now text-bg-dark position-relative my-2 hidden">
+                            <img src="https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bGFwdG9wfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"
+                                class="card-img product-img" alt="...">
+                            <div class="card-img-overlay card-shop-now-content position-absolute">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">This is a wider card with supporting text below as a natural
+                                    lead-in to
+                                    additional content. This content is a little bit longer.</p>
+                                <a type="button" class="btn btn-light" href="#">Shop Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-4 d-flex justify-content-center ">
+                        <div class="card card-shop-now text-bg-dark position-relative my-2 hidden">
+                            <img src="https://images.unsplash.com/photo-1637944059066-81c8eb0f7c02?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+                                class="card-img product-img" alt="...">
+                            <div class="card-img-overlay card-shop-now-content position-absolute">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">This is a wider card with supporting text below as a natural
+                                    lead-in to
+                                    additional content. This content is a little bit longer.</p>
+                                <a type="button" class="btn btn-light" href="#">Shop Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="featured-section">
+            <div class="container hidden my-5">
+                <div class="featured-products text-center fs-1 fw-bold my-5 pt-5">
+                    <span>Featured Products</span>
+                </div>
+
+                <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xxl-5 g-1 featured-index">
+
+                    <% products.slice(0, 10).forEach((product)=> {%>
+                        <div class="col d-flex justify-content-center">
+                            <div class="card">
+                                <a href="/product/<%= product._id %>"><img src="<%= product.img[0] %>"
+                                        class="card-img-top object-fit-cover" alt="..."></a>
+                                <div class="card-body">
+                                    <h5 class="card-title"><a class="link-dark" href="/product/<%= product._id %>">
+                                            <%= product.name %>
+                                        </a></h5>
+                                    <p class="card-text">
+                                        <%= product.category %>
+                                    </p>
+                                    <p class="card-text"><small class="text-body-secondary">$<%= product.price %>
+                                        </small></p>
+                                </div>
+                            </div>
+                        </div>
+                        <% }) %>
+                </div>
+            </div>
+
+            <section class="limited-offer-section my-5">
+                <div class="container d-flex justify-content-center">
+                    <div class="row limited-offer">
+                        <div class="col-12 col-md-8 p-5 colored">
+                            <p class="fs-4">Limited Offer</p>
+                            <p class="fs-1">Buy it Fast bro</p>
+                            <p class="fs-6">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quibusdam, maxime!
+                                Rerum, ratione nemo. Nobis tempora delectus velit optio nisi eligendi? .</p>
+                            <p class="fs-3">Bro just buy this pc right now!!</p>
+                            <a href="#" type="button" class="btn btn-light home-header-button">Shop
+                                Now</a>
+                        </div>
+                        <div class="col colored"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="our-quality mt-5">
+                <div class="container my-4">
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-1">
+                        <div class="col d-flex justify-content-center ">
+                            <div class="card text-center mb-3 quality-cards hidden" style="width: 18rem;">
+                                <div class="card-body">
+                                    <i data-feather="globe" class="quality-icons mb-2"></i>
+                                    <h5 class="card-title">Worldwide Shipping</h5>
+                                    <p class="card-text">Quibusdam, maxime! Rerum, ratione nemo. Nobis tempora delectus
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col d-flex justify-content-center ">
+                            <div class="card text-center mb-3 quality-cards hidden" style="width: 18rem;">
+                                <div class="card-body">
+                                    <i data-feather="check-circle" class="quality-icons mb-2"></i>
+                                    <h5 class="card-title">Best Quality</h5>
+                                    <p class="card-text">Quibusdam, maxime! Rerum, ratione nemo. Nobis tempora delectus
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col d-flex justify-content-center ">
+                            <div class="card text-center mb-3 quality-cards hidden" style="width: 18rem;">
+                                <div class="card-body">
+                                    <i data-feather="percent" class="quality-icons mb-2"></i>
+                                    <h5 class="card-title">Best Offers</h5>
+                                    <p class="card-text">Quibusdam, maxime! Rerum, ratione nemo. Nobis tempora delectus
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col d-flex justify-content-center ">
+                            <div class="card text-center mb-3 quality-cards hidden" style="width: 18rem;">
+                                <div class="card-body">
+                                    <i data-feather="lock" class="quality-icons mb-2"></i>
+                                    <h5 class="card-title">Secure Payments</h5>
+                                    <p class="card-text">Quibusdam, maxime! Rerum, ratione nemo. Nobis tempora delectus
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </section>
+    </main>
+
+    <%- block('scripts').append('<script src="/script/homeScript.js"></script>') %>

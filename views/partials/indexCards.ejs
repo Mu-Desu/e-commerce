@@ -1,0 +1,130 @@
+<% if(selectedOrder==='default' ){ products.forEach((product)=> {
+    %>
+    <div class="col">
+        <div class="card h-100">
+            <a href="/product/<%= product._id %>"><img src="<%= product.img[0] %>"
+                    class="card-img-top index-img object-fit-cover" alt="..."></a>
+            <div class="card-body">
+                <a href="/product/<%= product._id %>">
+                    <p class="card-title index-card-title">
+                        <%= product.name %>
+                    </p>
+                </a>
+                <p class="card-text">
+                    <small class="text-body-secondary">
+                        <%= product.category %>
+                    </small>
+                </p>
+                <p class="card-text">
+                    $<%= product.price %>
+                </p>
+                <p class="card-text">
+                    rating: <%= product.rating %>
+                </p>
+            </div>
+        </div>
+    </div>
+    <% })} else if (selectedOrder==='popularity' ) { products.forEach((product)=> { %>
+        <div class="col">
+            <div class="card h-100">
+                <a href="/product/<%= product._id %>"><img src="<%= product.img[0] %>"
+                        class="card-img-top index-img object-fit-cover" alt="..."></a>
+                <div class="card-body">
+                    <a href="/product/<%= product._id %>">
+                        <p class="card-title index-card-title">
+                            <%= product.name %>
+                        </p>
+                    </a>
+                    <p class="card-text">
+                        <small class="text-body-secondary">
+                            <%= product.category %>
+                        </small>
+                    </p>
+                    <p class="card-text">
+                        $<%= product.price %>
+                    </p>
+                    <p class="card-text">
+                        rating: <%= product.rating %>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <% })} else if (selectedOrder==='rating' ) { products.sort((a, b)=> b.rating - a.rating)
+            .forEach((product) => { %>
+            <div class="col">
+                <div class="card h-100">
+                    <a href="/product/<%= product._id %>"><img src="<%= product.img[0] %>"
+                            class="card-img-top index-img object-fit-cover" alt="..."></a>
+                    <div class="card-body">
+                        <a href="/product/<%= product._id %>">
+                            <p class="card-title index-card-title">
+                                <%= product.name %>
+                            </p>
+                        </a>
+                        <p class="card-text">
+                            <small class="text-body-secondary">
+                                <%= product.category %>
+                            </small>
+                        </p>
+                        <p class="card-text">
+                            $<%= product.price %>
+                        </p>
+                        <p class="card-text">
+                            rating: <%= product.rating %>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <% })} else if (selectedOrder==='price' ) { products.sort((a, b)=> a.price -
+                b.price).forEach((product)=> { %>
+                <div class="col">
+                    <div class="card h-100">
+                        <a href="/product/<%= product._id %>"><img src="<%= product.img[0] %>"
+                                class="card-img-top index-img object-fit-cover" alt="..."></a>
+                        <div class="card-body">
+                            <a href="/product/<%= product._id %>">
+                                <p class="card-title index-card-title">
+                                    <%= product.name %>
+                                </p>
+                            </a>
+                            <p class="card-text">
+                                <small class="text-body-secondary">
+                                    <%= product.category %>
+                                </small>
+                            </p>
+                            <p class="card-text">
+                                $<%= product.price %>
+                            </p>
+                            <p class="card-text">
+                                rating: <%= product.rating %>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <% })} else if (selectedOrder==='price-dec' ) { products.sort((a, b)=> b.price - a.price)
+                    .forEach((product) => { %>
+                    <div class="col">
+                        <div class="card h-100">
+                            <a href="/product/<%= product._id %>"><img src="<%= product.img[0] %>"
+                                    class="card-img-top index-img object-fit-cover" alt="..."></a>
+                            <div class="card-body">
+                                <a href="/product/<%= product._id %>">
+                                    <p class="card-title index-card-title">
+                                        <%= product.name %>
+                                    </p>
+                                </a>
+                                <p class="card-text">
+                                    <small class="text-body-secondary">
+                                        <%= product.category %>
+                                    </small>
+                                </p>
+                                <p class="card-text">
+                                    $<%= product.price %>
+                                </p>
+                                <p class="card-text">
+                                    rating: <%= product.rating %>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <% })} %>

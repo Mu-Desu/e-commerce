@@ -1,0 +1,255 @@
+<% layout('layout/boilerplate') %>
+
+    <section class="show-page">
+
+
+        <div class="container-fluid container-lg mt-5">
+            <div class="row">
+                <div class="col-12 col-lg-6">
+
+                    <div>
+                        <div class="f-carousel" id="myCarousel">
+                            <% product.img.forEach(function(i){ %>
+                                <div class="f-carousel__slide" data-thumb-src="<%= i %>">
+                                    <img width="640" height="480" alt="" data-lazy-src="<%= i %>" />
+                                </div>
+                                <% }) %>
+                        </div>
+                    </div>
+
+
+
+                    <!-- <form action="/products/<%= product._id %>?_method=DELETE" method="POST"><button
+                                class="btn btn-danger" href="/products/<%= product._id %>">Delete</button>
+                        </form> -->
+
+
+
+                </div>
+                <div class="col-12 col-lg-6">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mt-3">
+                            <li class="breadcrumb-item"><a href="/">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/products/category/<%= product.category %>">
+                                    <%= product.category %>
+                                </a></li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                <%= product.name %>
+                            </li>
+                        </ol>
+                    </nav>
+                    <div class="mb-2">
+                        <a href="/products/category/<%= product.category %>" class="card-text "><small
+                                class="text-body-secondary">
+                                <%= product.category %>
+                            </small></a>
+                    </div>
+
+                    <h2 class="mb-3">
+                        <%= product.name %>
+                    </h2>
+                    <h4 class="price">
+                        $<%= product.price %>
+                    </h4>
+                    <p>
+                        <%= product.description %>
+                    </p>
+                    <form action="/product/<%= product._id %>"
+                        class="row row-cols-lg-auto g-3 align-items-center border-top border-bottom my-1">
+
+                        <div class="col-12 mb-3">
+                            <input class="quantity" type="number" id="quantityInput" name="quantity" value="1" min="1">
+                        </div>
+
+                        <div class="col-12 mb-3">
+                            <button type="submit" class=" quantityBtn"><strong>ADD TO
+                                    CART</strong></button>
+                        </div>
+
+
+                    </form>
+                    <div class="my-1">
+                        <p><small>Categories: <a href="/products/category/<%= product.category %>">
+                                    <%= product.category %>
+                                </a></small></p>
+                    </div>
+                </div>
+            </div>
+            <div class="row py-3">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <button class="nav-link active" id="nav-description-tab" data-bs-toggle="tab"
+                            data-bs-target="#nav-description" type="button" role="tab" aria-controls="nav-description"
+                            aria-selected="true"><span class="tab-text">Description</span></button>
+                        <button class="nav-link" id="nav-additional-tab" data-bs-toggle="tab"
+                            data-bs-target="#nav-additional" type="button" role="tab" aria-controls="nav-additional"
+                            aria-selected="false"><span class="tab-text">Additional information</span></button>
+                        <button class="nav-link" id="nav-reviews-tab" data-bs-toggle="tab" data-bs-target="#nav-reviews"
+                            type="button" role="tab" aria-controls="nav-reviews" aria-selected="false"><span
+                                class="tab-text">Reviews</span></button>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active py-5" id="nav-description" role="tabpanel"
+                        aria-labelledby="nav-description-tab" tabindex="0">
+                        <h4>Product description</h4>
+                        <p class="py-2">
+                            <%= product.description %>
+                        </p>
+
+                    </div>
+                    <div class="tab-pane fade py-5" id="nav-additional" role="tabpanel"
+                        aria-labelledby="nav-additional-tab" tabindex="0">
+                        Brand : <%= product.brand %>
+
+                    </div>
+                    <div class="tab-pane fade py-5" id="nav-reviews" role="tabpanel" aria-labelledby="nav-reviews-tab"
+                        tabindex="0">
+                        <p>There are no reviews yet.</p>
+                        <form action="" class="row">
+                            <div class="card reviewCard ">
+                                <div class="card-body">
+                                    <h5 class="card-title">Add a review</h5>
+                                    <p>Your email address will not be published. Required fields are marked <span
+                                            class="red">*</span></p>
+                                    <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
+                                    <p class="card-text">
+
+                                    <div class="rating">
+                                        <fieldset class="starability-basic">
+                                            <legend>Your rating <span class="red">*</span></legend>
+                                            <input type="radio" id="no-rate" class="input-no-rate" name="rating"
+                                                value="0" checked aria-label="No rating." />
+                                            <input type="radio" id="first-rate1" name="rating" value="1" />
+                                            <label for="first-rate1" title="Terrible">1 star</label>
+                                            <input type="radio" id="first-rate2" name="rating" value="2" />
+                                            <label for="first-rate2" title="Not good">2 stars</label>
+                                            <input type="radio" id="first-rate3" name="rating" value="3" />
+                                            <label for="first-rate3" title="Average">3 stars</label>
+                                            <input type="radio" id="first-rate4" name="rating" value="4" />
+                                            <label for="first-rate4" title="Very good">4 stars</label>
+                                            <input type="radio" id="first-rate5" name="rating" value="5" />
+                                            <label for="first-rate5" title="Amazing">5 stars</label>
+                                        </fieldset>
+                                    </div>
+
+                                    </p>
+                                    <div class="col-12">
+                                        <label for="comment">Your review <span class="red">*</span></label>
+                                        <textarea id="comment" name="comment" id="" cols="30" rows="10"
+                                            required></textarea>
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-md-6">
+
+                                            <div class="form-floating mb-3">
+                                                <input type="text" class="form-control" id="username" name="username"
+                                                    placeholder="username" required>
+                                                <label for="username">Name <span class="red">*</span></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-floating mb-3">
+                                                <input type="email" class="form-control" id="emailaddress" name="email"
+                                                    placeholder="name@example.com" required>
+                                                <label for="emailaddress">Email address <span
+                                                        class="red">*</span></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="reviewSubmit" type="submit">SUBMIT</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <section class="my-2">
+                <div class="row">
+                    <div class="col-12 col-md-6 p-0">
+                        <img src="https://images.unsplash.com/photo-1603302576837-37561b2e2302?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1168&q=80"
+                            alt="" class="showImgDescription object-fit-cover">
+                    </div>
+                    <div class="col-12 col-md-6 p-0">
+                        <img src="https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80"
+                            alt="" class="showImgDescription object-fit-cover">
+                    </div>
+                </div>
+                <div class="row showReversedRow">
+                    <div class="col-12 col-md-6 p-0">
+                        <img src="https://images.unsplash.com/photo-1547394765-185e1e68f34e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                            alt="" class="showImgDescription object-fit-cover">
+                    </div>
+                    <div class="col-12 col-md-6 p-0 d-flex justify-content-center align-items-center whiteBC">
+                        <div class="p-5 lh-lg">
+                            <h5>Ut enim ad minim</h5>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                incididunt.
+                            </p>
+                            <h5>Quis nostrud
+                            </h5>
+                            <p>Sed do eiusmod tempor incididunt ut labore.</p>
+                            <h5>Duis aute irure
+                            </h5>
+                            <p>Dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-6 p-0 d-flex justify-content-center align-items-center whiteBC">
+                        <div class="p-5 lh-lg">
+                            <h5>More about the product</h5>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam consectetur tempora et
+                                animi consequuntur, natus voluptatem. At expedita reiciendis unde! Vel vero ea sint quia
+                                pariatur, enim culpa minus provident.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 p-0">
+                        <img src="https://images.unsplash.com/photo-1560762484-813fc97650a0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80"
+                            alt="" class="showImgDescription object-fit-cover">
+                    </div>
+                </div>
+            </section>
+
+            <div class="row py-5 related">
+                <h1 class="pb-3">Related Products</h1>
+                <% featuredProducts.forEach((Product)=> { %>
+                    <div class="col-6 col-sm-4 col-md-3">
+                        <div class="card h-100">
+                            <a href="/product/<%= Product._id %>"><img src="<%= Product.img[0] %>"
+                                    class="card-img-top index-img object-fit-cover" alt="..."></a>
+                            <div class="card-body">
+                                <a href="/product/<%= Product._id %>">
+                                    <p class="card-title index-card-title">
+                                        <%= Product.name %>
+                                    </p>
+                                </a>
+                                <p class="card-text">
+                                    <small class="text-body-secondary">
+                                        <%= Product.category %>
+                                    </small>
+                                </p>
+                                <p class="card-text">
+                                    $<%= Product.price %>
+                                </p>
+                                <p class="card-text">
+                                    rating: <%= Product.rating %>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
+            </div>
+        </div>
+    </section>
+
+    <script src="/fancybox/ui/dist/carousel/carousel.umd.js"></script>
+    <script src="/fancybox/ui/dist/carousel/carousel.thumbs.umd.js"></script>
+
+    <script src="/script/carousel.js"></script>

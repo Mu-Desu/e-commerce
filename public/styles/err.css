@@ -1,0 +1,18 @@
+main{
+    background-color: #f3f1f6;
+}
+
+.err{
+    background-color: #ffffff;
+}
+
+.err h1{
+    font-weight: 400;
+    font-size: 3rem;
+}
+
+.err p{
+    font-weight: 500;
+    font-size: 1.6rem;
+    color: #584d66;
+}

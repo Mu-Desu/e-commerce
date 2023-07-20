@@ -1,0 +1,215 @@
+<% layout('layout/boilerplate') %>
+
+    <section class="index-page">
+        <div class="container my-3">
+            <div class="row" id="index-row">
+                <div class="col-12 col-lg-3  filter pe-5">
+                    <form action="/product" method="get" class="d-flex my-5" role="search">
+                        <input name="name" class="form-control me-2 productSearchBox" type="search"
+                            placeholder="Search by products..." aria-label="Search">
+                        <button class="product-search" type="submit"> <img
+                                src="/icons/google/arrow_forward_ios_FILL0_wght400_GRAD0_opsz48.svg" class="search-icon"
+                                alt="">
+                        </button>
+                    </form>
+                    <form id="filterForm"
+                        action="<% if(currentPage === 'Store'){ %>/products<% } else { %>/products/category/<%= currentPage %><% } %>?orderBy=<%= selectedOrder %>"
+                        method="get">
+                        <div class="prices">
+                            <h5>Filter by Price</h5>
+                            <div class="range m-3">
+                                <div id="priceRange" name="pricerange"></div>
+
+                                <div class="filterPrice my-4 d-flex flex-row">
+                                    <button class="product-search fliterBtn" type="submit">FILTER</button>
+                                    <div id="selectedRange" class="priceRangeText text-center"></div>
+                                    <input type="hidden" id="minPrice" name="minPrice">
+                                    <input type="hidden" id="maxPrice" name="maxPrice">
+                                </div>
+
+                            </div>
+                        </div>
+                    </form>
+
+                    <% const categoryCount=allProducts.reduce((count, product)=> {
+                        const category = product.category;
+                        count[category] = (count[category] || 0) + 1;
+                        return count;
+                        }, {});
+                        %>
+                        <div class="categories my-5">
+                            <h5>Categories</h5>
+                            <ul class="list-group categoriesl-list">
+                                <li
+                                    class="list-group-item d-flex justify-content-between align-items-center categories-items">
+                                    <a href="/products/category/Laptop" class="categories-names">Laptops</a>
+                                    <span class="badge rounded-pill category-count">
+                                        <%= categoryCount.Laptop %>
+                                    </span>
+                                </li>
+                                <li
+                                    class="list-group-item d-flex justify-content-between align-items-center categories-items">
+                                    <a href="/products/category/PC" class="categories-names">PC</a>
+                                    <span class="badge rounded-pill category-count">
+                                        <%= categoryCount.PC %>
+                                    </span>
+                                </li>
+                                <li
+                                    class="list-group-item d-flex justify-content-between align-items-center categories-items">
+                                    <a href="/products/category/Accessory" class="categories-names">Accessories</a>
+                                    <span class="badge rounded-pill category-count">
+                                        <%= categoryCount.Accessory %>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="best-sellers">
+                            <h5>Best Sellers</h5>
+                            <% allProducts.slice(6, 11).forEach((product)=> { %>
+                                <div class="card mb-3 bestSellersCards" style="max-width: 540px;">
+                                    <div class="row g-0">
+                                        <div class="col-md-4 p-3">
+                                            <a href="/product/<%= product._id %>"><img src="<%= product.img[0] %>"
+                                                    class="img-fluid best-sellers-img" alt="..."></a>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="card-body">
+                                                <a href="/product/<%= product._id %>">
+                                                    <p class="card-title">
+                                                        <%= product.name %>
+                                                    </p>
+                                                </a>
+                                                <p class="card-text"><small class="text-body-secondary">$<%=
+                                                            product.price %></small></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% }) %>
+                        </div>
+
+
+                </div>
+
+                <div class="col-12 col-lg-9 products-index my-5">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col"></div>
+                            <div class="col-12 col-md-10">
+                                <% const productsPerPage=12; %>
+                                    <% const startProductIndex=(currentPageCount - 1) * productsPerPage + 1; %>
+                                        <% const endProductIndex=Math.min(currentPageCount * productsPerPage,
+                                            productsCount); %>
+
+
+                                            <nav aria-label="breadcrumb">
+                                                <ol class="breadcrumb mt-5">
+                                                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                                    <% if (currentPageCount==1) {%>
+                                                        <li class="breadcrumb-item active" aria-current="page">
+                                                            <%= currentPage %>
+                                                        </li>
+                                                        <% }else{ %>
+                                                            <li class="breadcrumb-item" aria-current="page">
+                                                                <a
+                                                                    href="/products<% if(currentPage === 'Store') { %><% }else{ %>/category/<%= currentPage %><% } %>?orderBy=<%= selectedOrder %>">
+                                                                    <%= currentPage %>
+                                                                </a>
+
+                                                            </li>
+                                                            <li class="breadcrumb-item active" aria-current="page">
+                                                                Page <%= currentPageCount %>
+                                                            </li>
+                                                            <% } %>
+                                                </ol>
+                                            </nav>
+                                            <div class="index-info d-flex my-2">
+
+                                                <p class="result-count flex-grow-1">
+                                                    Showing <%= startProductIndex %> - <%= endProductIndex %> of <%=
+                                                                productsCount %> results
+                                                </p>
+                                                <div class="">
+                                                    <form id="sortForm"
+                                                        action="/products<% if(currentPage != 'Store') {%>/category/<%= currentPage %><% } %>"
+                                                        method="get">
+                                                        <select class="form-select" name="orderBy"
+                                                            aria-label="shop-order">
+                                                            <option value="default" <%=selectedOrder==='default'
+                                                                ? 'selected' : '' %>>Default sorting</option>
+                                                            <option value="popularity" <%=selectedOrder==='popularity'
+                                                                ? 'selected' : '' %>
+                                                                >Sort by popularity</option>
+                                                            <option value="rating" <%=selectedOrder==='rating'
+                                                                ? 'selected' : '' %>>Sort by average rating</option>
+                                                            <option value="price" <%=selectedOrder==='price'
+                                                                ? 'selected' : '' %>>Sort by price: low to high
+                                                            </option>
+                                                            <option value="price-dec" <%=selectedOrder==='price-dec'
+                                                                ? 'selected' : '' %>>Sort by price: high to low
+                                                            </option>
+                                                        </select>
+                                                    </form>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row row-cols-2 row-cols-md-3 g-4 my-5">
+                                                <%- include('../partials/indexCards') %>
+                                            </div>
+                                            <nav aria-label="Page navigation">
+                                                <ul class="pagination pb-5">
+                                                    <li
+                                                        class="page-item <% if (currentPageCount === 1 ) { %>disabled <% } %>">
+                                                        <a class="page-link"
+                                                            href="<% if (currentPageCount != 1 ) { %><% if (currentPageCount == 2) {%>/products<% if(currentPage != 'Store') {%>/category/<%= currentPage %><% } %>?orderBy=<%= selectedOrder %><%} else  {%>/products/<% if(currentPage != 'Store') {%>category/<%= currentPage %>/<% } %>page/<%= parseInt(currentPageCount) - 1  %>?orderBy=<%= selectedOrder %><% }} %>"
+                                                            aria-label="Previous">
+                                                            <span aria-hidden="true">&laquo;</span>
+                                                        </a>
+                                                    </li>
+                                                    <li
+                                                        class="page-item <% if (currentPageCount === 1) { %>active<% } %>">
+                                                        <a class="page-link"
+                                                            href="/products<% if(currentPage != 'Store') {%>/category/<%= currentPage %><% } %>?orderBy=<%= selectedOrder %>">1</a>
+                                                    </li>
+                                                    <% for (let i=2; i <=totalPages; i++) { %>
+                                                        <li
+                                                            class="page-item <% if (currentPageCount == i) { %>active<% } %>">
+                                                            <a class="page-link"
+                                                                href="/products/<% if(currentPage != 'Store') {%>category/<%= currentPage %>/<% } %>page/<%= i %>?orderBy=<%= selectedOrder %>">
+                                                                <%= i %>
+                                                            </a>
+                                                        </li>
+                                                        <% } %>
+                                                            <li
+                                                                class="page-item <% if (currentPageCount == totalPages ) { %>disabled <% } %>">
+                                                                <a class="page-link "
+                                                                    href="<% if (currentPageCount != totalPages ) { %>/products/<% if(currentPage != 'Store') {%>category/<%= currentPage %>/<% } %>page/<%= parseInt(currentPageCount) + 1  %>?orderBy=<%= selectedOrder %><% } %>"
+                                                                    aria-label="Next">
+                                                                    <span aria-hidden="true">&raquo;</span>
+                                                                </a>
+                                                            </li>
+                                                </ul>
+                                            </nav>
+
+
+
+                            </div>
+                            <div class="col"></div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        </div>
+    </section>
+
+    <%- block('scripts').append('<script src="/nouislider/dist/nouislider.min.js"></script>') %>
+        <%- block('scripts').append('<script src="/script/sliderRange.js"></script>') %>
+            <%- block('scripts').append('<script src="/script/indexScript.js"></script>') %>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheProStore</title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link href="/nouislider/dist/nouislider.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/fancybox/ui/dist/carousel/carousel.css">
+    <link rel="stylesheet" href="/fancybox/ui/dist/fancybox/fancybox.css">
+    <link rel="stylesheet" href="/styles/home.css">
+    <link rel="stylesheet" href="/styles/slider.css">
+    <link rel="stylesheet" href="/styles/show.css">
+    <link rel="stylesheet" href="/styles/err.css">
+    <link rel="stylesheet" href="/styles/starability-basic.min.css">
+
+
+
+</head>
+
+<body class="d-flex flex-column vh-100">
+
+    <%- include('../partials/navbar') %>
+
+
+        <%- body %>
+
+            <%- include('../partials/footer') %>
+
+                <script src="/bootstrap/js/bootstrap.min.js"></script>
+                <script src="/icons/feather-icons/dist/feather.min.js"></script>
+
+                <script>
+                    feather.replace()
+                </script>
+
+                <%- block('scripts') %>
+</body>
+
+</html>

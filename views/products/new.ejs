@@ -1,0 +1,54 @@
+<% layout('layout/boilerplate') %>
+    <div class="container">
+        <div class="row">
+            <form action="/products/new" method="POST">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="name" placeholder="Name" name="product[name]" required>
+                    <label for="floatingInput">Product Name</label>
+                </div>
+                <div class="form-floating mb-3"">
+                <input type=" text" class="form-control" id="price" placeholder="Price" name="product[price]" required>
+                    <label for="floatingPassword">Price</label>
+                </div>
+                <div class="form-floating mb-3"">
+                <input type=" text" class="form-control" id="description" placeholder="Description"
+                    name="product[description]" required>
+                    <label for="floatingPassword">Description</label>
+                </div>
+                <div class="form-floating mb-3"">
+                <select class=" form-select" aria-label="Default select example" id="category" name="product[category]"
+                    required>
+                    <option selected>Open this select menu</option>
+                    <option value="Laptop">Laptop</option>
+                    <option value="PC">PC</option>
+                    <option value="Accessory">Accessory</option>
+                    </select>
+                </div>
+                <div class="form-floating mb-3"">
+                <input type=" text" class="form-control" id="img" placeholder="img" name="product[img]" required>
+                    <label for="floatingPassword">img</label>
+                </div>
+                <div class="form-floating mb-3"">
+                    <input type=" text" class="form-control" id="img" placeholder="img" name="product[rating]">
+                    <label for="floatingPassword">rating</label>
+                </div>
+                <div class="form-floating mb-3"">
+                    <input type=" text" class="form-control" id="img" placeholder="img" name="product[stock]">
+                    <label for="floatingPassword">stock</label>
+                </div>
+                <div class="form-floating mb-3"">
+                    <input type=" text" class="form-control" id="img" placeholder="img" name="product[weight]">
+                    <label for="floatingPassword">weight</label>
+                </div>
+                <div class="form-floating mb-3"">
+                    <input type=" text" class="form-control" id="img" placeholder="img" name="product[size]">
+                    <label for="floatingPassword">size</label>
+                </div>
+                <div class="form-floating mb-3"">
+                    <input type=" text" class="form-control" id="img" placeholder="img" name="product[brand]" required>
+                    <label for="floatingPassword">brand</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
