@@ -300,7 +300,7 @@ app.get(
     }
     const product = await Product.findOne({ name: searchTerm });
     if (!product) {
-      return res.redirect(`/${searchTerm}`);
+      return res.redirect(`/search/${searchTerm}`);
     }
     res.redirect(`/product/${product._id}`);
   })
@@ -362,7 +362,7 @@ app.get(
 );
 
 app.get(
-  "/:searchTerm",
+  "/search/:searchTerm",
   catchAsync(async (req, res) => {
     const { searchTerm } = req.params;
     const allProducts = await Product.find({});
@@ -383,6 +383,18 @@ app.get(
     });
   })
 );
+
+app.get("/about", (req, res) => {
+  let totalPrice = 0.0;
+  const active = "About";
+  res.render("products/about", { totalPrice, active });
+});
+
+app.get("/contact-us", (req, res) => {
+  let totalPrice = 0.0;
+  const active = "ContactUs";
+  res.render("products/contact-us", { totalPrice, active });
+});
 
 app.post(
   "/products/new",
@@ -410,9 +422,11 @@ app.all("*", (req, res, next) => {
 
 app.use((err, req, res, next) => {
   const { statusCode = 500, message = "Something went wrong" } = err;
+  let totalPrice = 0.0;
+  const active = "";
   // if (!err.message) err.message = 'Oh No, Something Went Wrong!'
   // res.status(statusCode).render("error", { err });
-  res.status(statusCode).render("error", { err });
+  res.status(statusCode).render("error", { err, totalPrice, active });
 });
 
 app.listen(3000, () => {

@@ -300,7 +300,6 @@ main{
     content: "";
     position: absolute;
     bottom: -10px;
-    
     left: 50%;
     width: 50%;
     border-bottom: 2px solid black;
@@ -344,6 +343,10 @@ main{
 
 .card .show-img{
     max-height: 26rem;
+}
+
+.our-quality{
+    line-height: 2rem;
 }
 
 .quality-cards{
