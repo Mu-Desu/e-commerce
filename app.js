@@ -7,7 +7,7 @@ const ejsMate = require("ejs-mate");
 const catchAsync = require("./utils/catchAsync");
 const ExpressError = require("./utils/ExpressError");
 const methodOverride = require("method-override");
-const mongoSanitizee = require("express-mongo-sanitize");
+const mongoSanitize = require("express-mongo-sanitize");
 
 const Product = require("./models/product");
 
@@ -17,7 +17,7 @@ app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
-app.use(mongoSanitizee());
+app.use(mongoSanitize());
 
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
